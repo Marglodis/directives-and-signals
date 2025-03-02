@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 
 @Component({
   standalone: false,
@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class CounterPageComponent {
 
+  public counter = signal(10);
+
+  //Señal computada de solo lectura
+  public squareCounter = computed(() => this.counter() * this.counter());
+
+  increaseBy(value: number) {
+    this.counter.update(current => current + value);
+  }
 }
